@@ -8,6 +8,14 @@
         <servlet-name>ServletRegistro</servlet-name>
         <servlet-class>controlador.ServletRegistro</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletComprarProducto</servlet-name>
+        <servlet-class>controlador.ServletComprarProducto</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletCompra</servlet-name>
+        <servlet-class>controlador.ServletCompra</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletLogin</servlet-name>
         <url-pattern>/ServletLogin</url-pattern>
@@ -15,6 +23,14 @@
     <servlet-mapping>
         <servlet-name>ServletRegistro</servlet-name>
         <url-pattern>/ServletRegistro</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletComprarProducto</servlet-name>
+        <url-pattern>/ServletComprarProducto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletCompra</servlet-name>
+        <url-pattern>/ServletCompra</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -59,7 +59,7 @@ public class Bd {
             //Ejecucion de la sentencia SQL y obtencion de resultados en un objeto ResultSet
             
             //Obtencion de un objeto Statement para ejecutar sentencias SQL
-            String sentenciaSQL = "SELECT nombre FROM categorias";
+            String sentenciaSQL = "SELECT nombre FROM categorias where id_categoria = "+cat;
             
             Statement stmt = (Statement) con.createStatement();
             ResultSet rs = stmt.executeQuery(sentenciaSQL);
