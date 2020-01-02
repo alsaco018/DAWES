@@ -16,7 +16,7 @@
         <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans:600'>
         <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/header.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 <link rel="stylesheet" href="assets/css/catalogo.css">
 <%
@@ -42,7 +42,7 @@
                                                                                         %>
                                                                                         <li><a href="carritoUsuario.jsp">Carrito de <%=sesion.getAttribute("nick").toString() %></a></li>
                                         <% }else{ %>
-                                            <li><a href="#banner">Home</a></li>
+                                            <li><a href="index.jsp">Home</a></li>
                                         <% }%>
 											<li><a href="#cta">Pedidos</a></li>
                                             <li><a href="productos.jsp">Catálogo</a></li>
@@ -59,7 +59,8 @@
 						</nav>
 					</header>
     <div class="container">
-    <div class="well well-sm">
+        
+    <div class="well2 well-sm">
         <div id="view" class="btn-group">
             <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list">
             </span>List</a> <a href="#" id="grid" class="btn btn-default btn-sm"><span
@@ -67,20 +68,20 @@
         </div>
 
         
-    <div id="products" class="row list-group">
+    <div id="products" class="list-group">
         <% for(int i = 0; i < productos.size(); ++i){ producto = i;%>
         <div class="item  col-xs-4 col-md-3">
             <form action="" method="POST">
-                <input type="text" value="<%=producto %>" name="id" id="id" hidden>
+                <input type="text" value="<%=producto %>" name="id"  hidden >
             <div class="thumbnail">
                 <img class="group list-group-image" src="<%=productos.get(i).getFoto() %>" width="90%" height="90%" alt="<%=productos.get(i).getFoto() %>" />
               <div class="category">
                 <h5 class="category-name"><%=Bd.consultaCategoria(productos.get(i).getCategoria()) %></h5>
               </div>
-                <div class="caption">
+                <div class="caption2">
                     <h4 class="group inner list-group-item-heading">
                         <%=productos.get(i).getNombre() %></h4>
-                    <div class="row">
+                    <div class="">
                         <div class="col-xs-12 col-md-6">
                             <p class="lead">
                                 <%=(double)Math.round(productos.get(i).getPrecio() * 100d) / 100d %> Euros</p>
@@ -101,6 +102,7 @@
     </div>
     
 </div>
+             
     </div>
     <!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>

@@ -75,6 +75,31 @@ public class Bd {
        return res; 
     }
     
+    public static String consultaProducto(int prod){
+       
+        Connection con = null;
+         String res = "";
+        try {
+            con = crearConexion();
+            //Ejecucion de la sentencia SQL y obtencion de resultados en un objeto ResultSet
+            
+            //Obtencion de un objeto Statement para ejecutar sentencias SQL
+            String sentenciaSQL = "SELECT nombre FROM productos where id_producto = "+prod;
+            
+            Statement stmt = (Statement) con.createStatement();
+            ResultSet rs = stmt.executeQuery(sentenciaSQL);
+            //Muestra de resultados mediante un bucle que recorre los registros que verifican la sentencia
+            
+            while(rs.next()){
+                res = rs.getString(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Bd.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+       return res; 
+    }
+    
      public static ArrayList<Producto> consultaProductos(){
         ArrayList<Producto> lista = new ArrayList<Producto>();
         Producto producto;
@@ -122,6 +147,34 @@ public class Bd {
             while(rs.next()){
                 usuario = new Usuario(rs.getInt(1), rs.getString(2), rs.getString(3),rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7));
                 lista.add(usuario);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Bd.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+       return lista; 
+    }
+    
+    
+    public static ArrayList<LineaPedido> consultaLineaPedidos(){
+        ArrayList<LineaPedido> lista = new ArrayList<LineaPedido>();
+        LineaPedido lineaPedido;
+        Connection con = null;
+         
+        try {
+            con = crearConexion();
+            //Ejecucion de la sentencia SQL y obtencion de resultados en un objeto ResultSet
+            
+            //Obtencion de un objeto Statement para ejecutar sentencias SQL
+            String sentenciaSQL = "SELECT * FROM lineapedidos";
+            
+            Statement stmt = (Statement) con.createStatement();
+            ResultSet rs = stmt.executeQuery(sentenciaSQL);
+            //Muestra de resultados mediante un bucle que recorre los registros que verifican la sentencia
+            
+            while(rs.next()){
+                lineaPedido = new LineaPedido(rs.getInt(2), rs.getDouble(3),rs.getInt(4));
+                lista.add(lineaPedido);
             }
         } catch (SQLException ex) {
             Logger.getLogger(Bd.class.getName()).log(Level.SEVERE, null, ex);

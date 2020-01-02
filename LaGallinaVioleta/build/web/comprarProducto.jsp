@@ -13,11 +13,46 @@
       %>
   <title><%=prod.getNombre() %></title>
   <link rel="stylesheet" href="assets/css/comprarProducto.css">
+  <link rel="stylesheet" href="assets/css/header.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
 </head>
 <body>
+    <!-- Header -->
+					<header id="header" class="alt">
+						<h1><a href="index.html">La Gallina Violeta</a></h1>
+						<nav id="nav">
+							<ul>
+								<li class="special">
+									<a href="#menu" class="menuToggle"><span>Menu</span></a>
+                                                                        <div id="menu" style="margin-left: 5%">
+										<ul>
+                                                                                    <% if(sesion.getAttribute("nick") != null){
+                                                                                        if(sesion.getAttribute("perfil").toString().equals("administrador")){ %>
+                                                                                            <li><a href="administracion.jsp">Administrar sitio</a></li>
+                                                                                        <%}
+                                                                                        %>
+                                                                                        <li><a href="carritoUsuario.jsp">Carrito de <%=sesion.getAttribute("nick").toString() %></a></li>
+                                        <% }else{ %>
+                                            <li><a href="index.jsp">Home</a></li>
+                                        <% }%>
+											<li><a href="#cta">Pedidos</a></li>
+                                            <li><a href="productos.jsp">Catálogo</a></li>
+                                            <% if(sesion.getAttribute("nick") != null) {%><li><a href = "logOut.jsp">Cerrar sesión</a></li>
+                                        <% }else{ %>
+                                            <li><a href="SignUp.html">Iniciar sesión / Registrarse</a></li>
+                                        <% } %>
+											
+											
+										</ul>
+									</div>
+								</li>
+							</ul>
+						</nav>
+					</header>
 <!-- partial:index.partial.html -->
-<div class="container">
+<div class="container2">
+    <% if(sesion.getAttribute("nick") != null){ %>
     <form action="ServletCompra" method="POST">
         <input type="text" value="<%=prod.getId() %>" hidden name="id" id="id">
   <div>
@@ -47,10 +82,23 @@
     </div>
   </div>
     </form>
+    <%}else{ %>
+    <div>
+        <h1 style="color: red"><br>Debes logearte para poder realizar una compra.</h1><br>
+        <div align="center"><form><button class="btn btn-success" type="submit" formaction="SignUp.html">Log in</button></form></div>
+    </div>
+             
+<%} %>
 </div>
 
 <!-- partial -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script><script  src="assets/js/comprarProducto.js"></script>
-
+<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
 </body>
 </html>

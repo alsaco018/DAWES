@@ -12,7 +12,7 @@ body {
   text-transform: uppercase;
 }
 
-.container {
+.container2 {
   position: relative;
   margin: auto;
   overflow: hidden;
@@ -21,6 +21,7 @@ body {
   background: white;
   box-shadow: 5px 5px 15px rgba(186, 126, 126, 0.5);
   border-radius: 10px;
+  
 }
 
 p {
@@ -40,7 +41,7 @@ h2 {
   margin-top: -5px;
 }
 
-img {
+img2 {
   width: 290px;
   margin-top: 47px;
 }
@@ -93,7 +94,7 @@ img {
   text-align: justify;
 }
 
-button {
+button2 {
   background: #d0a6ec;
   padding: 10px;
   display: inline-block;
@@ -106,7 +107,7 @@ button {
   color: #F5F5F5;
   cursor: pointer;
 }
-button:hover {
+button2:hover {
   background: #d0a6ec;
   transition: all .4s ease-in-out;
 }
@@ -150,12 +151,12 @@ button:hover {
   transition: all .4s ease-in-out;
 }
 
-.focus {
+.focus2 {
   background: #d0a6ec;
   color: #F5F5F5;
 }
 
-footer {
+footer2 {
   position: absolute;
   bottom: 0;
   right: 0;
@@ -163,13 +164,13 @@ footer {
   text-transform: uppercase;
   padding: 10px;
 }
-footer p {
+footer2 p {
   letter-spacing: 3px;
 }
-footer a {
+footer2 a {
   color: #ffffff;
   text-decoration: none;
 }
-footer a:hover {
+footer2 a:hover {
   color: #7d7d7d;
 }
