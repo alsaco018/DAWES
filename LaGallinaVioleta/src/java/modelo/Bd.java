@@ -5,6 +5,7 @@
  */
 package modelo;
 
+import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -13,6 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -156,17 +158,17 @@ public class Bd {
     }
     
     
-    public static ArrayList<LineaPedido> consultaLineaPedidos(){
+    public static ArrayList<LineaPedido> consultaLineaPedidos(int idPedido){
         ArrayList<LineaPedido> lista = new ArrayList<LineaPedido>();
         LineaPedido lineaPedido;
         Connection con = null;
-         
+        
         try {
             con = crearConexion();
             //Ejecucion de la sentencia SQL y obtencion de resultados en un objeto ResultSet
             
             //Obtencion de un objeto Statement para ejecutar sentencias SQL
-            String sentenciaSQL = "SELECT * FROM lineapedidos";
+            String sentenciaSQL = "SELECT * FROM lineapedidos WHERE id_pedido = "+idPedido+"";
             
             Statement stmt = (Statement) con.createStatement();
             ResultSet rs = stmt.executeQuery(sentenciaSQL);
@@ -175,6 +177,62 @@ public class Bd {
             while(rs.next()){
                 lineaPedido = new LineaPedido(rs.getInt(2), rs.getDouble(3),rs.getInt(4));
                 lista.add(lineaPedido);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Bd.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+       return lista; 
+    }
+    
+//    public static void borraCarrito(){
+//        String delete = "DELETE FROM `lineapedidos`";
+//        actualiza(delete);
+//    }
+    
+    public static int obtenerIdPedido(){
+       Connection con = null; 
+       int res = 0;
+       try {
+            con = crearConexion();
+            //Ejecucion de la sentencia SQL y obtencion de resultados en un objeto ResultSet
+            
+            //Obtencion de un objeto Statement para ejecutar sentencias SQL
+            String sentenciaSQL = "SELECT `id_pedido` FROM `pedidos` order by `id_pedido` desc limit 1 ";
+            
+            Statement stmt = (Statement) con.createStatement();
+            ResultSet rs = stmt.executeQuery(sentenciaSQL);
+            //Muestra de resultados mediante un bucle que recorre los registros que verifican la sentencia
+            
+            while(rs.next()){
+                res = rs.getInt(1);
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Bd.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       return res;
+    } 
+    
+    public static ArrayList<Pedido> consultaPedidos(int id){
+        ArrayList<Pedido> lista = new ArrayList<Pedido>();
+        Pedido pedido;
+        Connection con = null;
+         
+        try {
+            con = crearConexion();
+            //Ejecucion de la sentencia SQL y obtencion de resultados en un objeto ResultSet
+            
+            //Obtencion de un objeto Statement para ejecutar sentencias SQL
+            String sentenciaSQL = "SELECT * FROM pedidos where id_cliente = "+id;
+            
+            Statement stmt = (Statement) con.createStatement();
+            ResultSet rs = stmt.executeQuery(sentenciaSQL);
+            //Muestra de resultados mediante un bucle que recorre los registros que verifican la sentencia
+            
+            while(rs.next()){
+                pedido = new Pedido(rs.getInt(1), rs.getInt(2), rs.getString(3),rs.getDate(4));
+                lista.add(pedido);
             }
         } catch (SQLException ex) {
             Logger.getLogger(Bd.class.getName()).log(Level.SEVERE, null, ex);

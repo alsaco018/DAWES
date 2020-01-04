@@ -7,18 +7,23 @@ package controlador;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import modelo.Bd;
+import static modelo.Bd.actualiza;
+import modelo.LineaPedido;
 
 /**
  *
  * @author alber
  */
-public class ServletCompra extends HttpServlet {
+public class ServletPagar extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,16 +36,16 @@ public class ServletCompra extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
 //        try (PrintWriter out = response.getWriter()) {
 //            /* TODO output your page here. You may use following sample code. */
 //            out.println("<!DOCTYPE html>");
 //            out.println("<html>");
 //            out.println("<head>");
-//            out.println("<title>Servlet ServletCompra</title>");            
+//            out.println("<title>Servlet ServletPagar</title>");            
 //            out.println("</head>");
 //            out.println("<body>");
-//            out.println("<h1>Servlet ServletCompra at " + request.getContextPath() + "</h1>");
+//            out.println("<h1>Servlet ServletPagar at " + request.getContextPath() + "</h1>");
 //            out.println("</body>");
 //            out.println("</html>");
 //        }
@@ -72,20 +77,19 @@ public class ServletCompra extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String idProducto = request.getParameter("id");
-        String cantidad = request.getParameter("cantidad");
-        String precio = request.getParameter("precio");
-        double prec = Double.parseDouble(precio);
-        int cant = Integer.parseInt(cantidad);
         
         HttpSession sesion = request.getSession();
+        int id = (int) sesion.getAttribute("idCliente");
+        String direccion = (String) sesion.getAttribute("direccion");
+        Date fecha = new Date();
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
         int idPedido = (int) sesion.getAttribute("idPedido");
-        double precioFinal = cant * prec;
-        precioFinal = (double)Math.round(precioFinal * 100d) / 100d ;
-        String insert = "INSERT INTO `lineapedidos`(`id_pedido`, `id_producto`, `precio`, `cantidad`) VALUES ("+idPedido+","+idProducto+","+precioFinal+","+cant+")";
-        Bd.actualiza(insert);
-        
-        request.getRequestDispatcher("/productos.jsp").forward(request, response);
+        List<LineaPedido> carrito = Bd.consultaLineaPedidos(idPedido);
+        String sql = "INSERT INTO `pedidos`(`id_pedido`, `id_cliente`, `direccion`, `fecha`) VALUES ("+idPedido+","+id+",'"+direccion+"','"+formatoFecha.format(fecha)+"');";
+        Bd.actualiza(sql);
+        idPedido++;
+        sesion.setAttribute("idPedido", idPedido);
+        request.getRequestDispatcher("/pedidoUsuario.jsp").forward(request, response);
     }
 
     /**

@@ -13,12 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import modelo.Bd;
+import static modelo.Bd.actualiza;
 
 /**
  *
  * @author alber
  */
-public class ServletCompra extends HttpServlet {
+public class ServletBorrarCarrito extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,16 +32,16 @@ public class ServletCompra extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
 //        try (PrintWriter out = response.getWriter()) {
 //            /* TODO output your page here. You may use following sample code. */
 //            out.println("<!DOCTYPE html>");
 //            out.println("<html>");
 //            out.println("<head>");
-//            out.println("<title>Servlet ServletCompra</title>");            
+//            out.println("<title>Servlet ServletBorrarCarrito</title>");            
 //            out.println("</head>");
 //            out.println("<body>");
-//            out.println("<h1>Servlet ServletCompra at " + request.getContextPath() + "</h1>");
+//            out.println("<h1>Servlet ServletBorrarCarrito at " + request.getContextPath() + "</h1>");
 //            out.println("</body>");
 //            out.println("</html>");
 //        }
@@ -72,20 +73,12 @@ public class ServletCompra extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String idProducto = request.getParameter("id");
-        String cantidad = request.getParameter("cantidad");
-        String precio = request.getParameter("precio");
-        double prec = Double.parseDouble(precio);
-        int cant = Integer.parseInt(cantidad);
-        
         HttpSession sesion = request.getSession();
         int idPedido = (int) sesion.getAttribute("idPedido");
-        double precioFinal = cant * prec;
-        precioFinal = (double)Math.round(precioFinal * 100d) / 100d ;
-        String insert = "INSERT INTO `lineapedidos`(`id_pedido`, `id_producto`, `precio`, `cantidad`) VALUES ("+idPedido+","+idProducto+","+precioFinal+","+cant+")";
-        Bd.actualiza(insert);
-        
-        request.getRequestDispatcher("/productos.jsp").forward(request, response);
+        String delete = "DELETE FROM `lineapedidos` WHERE id_pedido = "+idPedido+";";
+        actualiza(delete);
+        request.getRequestDispatcher("/carritoUsuario.jsp").forward(request, response);
+               
     }
 
     /**

@@ -30,21 +30,24 @@
 									<a href="#menu" class="menuToggle"><span>Menu</span></a>
 									<div id="menu">
 										<ul>
+                                                                                    <li><a href="index.jsp">Home</a></li>
                                                                                     <% if(sesion.getAttribute("nick") != null){
-                                                                                        if(sesion.getAttribute("perfil").toString().equals("administrador")){ %>
-                                                                                            <li><a href="administracion.jsp">Administrar sitio</a></li>
-                                                                                        <%}
+                                                                                        //if(sesion.getAttribute("perfil").toString().equals("administrador")){ %>
+                                                                                            <!--<li><a href="administracion.jsp">Administrar sitio</a></li>-->
+                                                                                        <%//}
                                                                                         %>
-                                                                                        <li><a href="carritoUsuario.jsp">Carrito de <%=sesion.getAttribute("nick").toString() %></a></li>
-                                        <% }else{ %>
-                                            <li><a href="#banner">Home</a></li>
-                                        <% }%>
-											<li><a href="#cta">Pedidos</a></li>
-                                            <li><a href="productos.jsp">Catálogo</a></li>
+                                                                                        
+                                                                                        <li><a href="carritoUsuario.jsp">Carrito de <%=sesion.getAttribute("nick").toString()%></a></li>
+                                       
+											<li><a href="pedidoUsuario.jsp">Pedidos</a></li>
+                                                                                        <%
+                                                                                            }%>
+                                            <li><a href="productos.jsp">Productos</a></li>
                                             <% if(sesion.getAttribute("nick") != null) {%><li><a href = "logOut.jsp">Cerrar sesión</a></li>
                                         <% }else{ %>
                                             <li><a href="SignUp.html">Iniciar sesión / Registrarse</a></li>
-                                        <% } %>
+                                        <% } 
+%>
 											
 											
 										</ul>
@@ -149,7 +152,7 @@
 								<p>Realiza tu pedido y te lo enviaremos a casa.</p>
 							</header>
 							<ul class="actions stacked">
-								<li><a href="#" class="button fit primary">Hacer pedido</a></li>
+								<li><a href="productos.jsp" class="button fit primary">Hacer pedido</a></li>
 								
 							</ul>
 						</div>

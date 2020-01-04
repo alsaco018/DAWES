@@ -16,6 +16,14 @@
         <servlet-name>ServletCompra</servlet-name>
         <servlet-class>controlador.ServletCompra</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletPagar</servlet-name>
+        <servlet-class>controlador.ServletPagar</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletBorrarCarrito</servlet-name>
+        <servlet-class>controlador.ServletBorrarCarrito</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletLogin</servlet-name>
         <url-pattern>/ServletLogin</url-pattern>
@@ -31,6 +39,14 @@
     <servlet-mapping>
         <servlet-name>ServletCompra</servlet-name>
         <url-pattern>/ServletCompra</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletPagar</servlet-name>
+        <url-pattern>/ServletPagar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletBorrarCarrito</servlet-name>
+        <url-pattern>/ServletBorrarCarrito</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

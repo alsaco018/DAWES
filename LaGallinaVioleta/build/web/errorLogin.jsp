@@ -9,7 +9,7 @@
 
   function compruebaContrasenna(){
       if(document.getElementById('pass').value !== document.getElementById('pass2').value){
-        alert("Las contraseÃ±as no coinciden");
+        alert("Las contraseñas no coinciden");
         event.preventDefault();
         document.getElementById('pass').value = "";
         document.getElementById('pass2').value = "";
@@ -21,7 +21,6 @@
 </script>
 </head>
 <body>
-    
 <div class="login-wrap">
 	<div class="login-html">
 		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Log in</label>
@@ -34,7 +33,7 @@
               <input name="nick" id="nick" type="text" class="input">
             </div>
             <div class="group">
-              <label for="pass0" class="label">ContraseÃ±a</label>
+              <label for="pass0" class="label">Contraseña</label>
               <input name="pass0" id="pass0" type="password" class="input" data-type="password">
             </div>
             <!--<div class="group">
@@ -46,7 +45,7 @@
             </div>
             <div class="hr"></div>
             <div class="foot-lnk">
-              
+                <p style="color:red;">El nombre de usuario o contraseña no son correctos.</p>
             </div>
             </form>
       </div>
@@ -57,7 +56,7 @@
               <input name="user" id="user" type="text" class="input">
             </div>
             <div class="group">
-              <label for="pass" class="label">ContraseÃ±a</label>
+              <label for="pass" class="label">Contraseña</label>
               <input name="pass" id="pass" type="password" class="input" data-type="password">
             </div>
 
@@ -82,14 +81,14 @@
             </div>
                                 
             <!--<div class="group">
-              <label for="pass2" class="label">Vuelve a escribir la contraseÃ±a</label>
+              <label for="pass2" class="label">Vuelve a escribir la contraseña</label>
               <input id="pass2" type="password" class="input" data-type="password">
               
             </div>-->
             </form>
             <div class="hr"></div>
             <div class="foot-lnk">
-              <label for="tab-1">Â¿Ya perteneces a la web?</a>
+              <label for="tab-1">¿Ya perteneces a la web?</a>
             </div>
             
 			</div>

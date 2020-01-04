@@ -97,6 +97,10 @@ public class ServletLogin extends HttpServlet {
                 sesion.setAttribute("direccion", user.getDireccion());
                 sesion.setAttribute("clave", clave);
                 sesion.setAttribute("idCliente", user.getId());
+                int idPedido = Bd.obtenerIdPedido();
+                idPedido++;
+        
+                sesion.setAttribute("idPedido", idPedido);
 
                 request.getRequestDispatcher("/index.jsp").forward(request, response); //si se encuentra en la bd pasamos al portal de entrada
             }else{
