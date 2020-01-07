@@ -37,9 +37,9 @@
 										<ul>
                                                                                     <li><a href="index.jsp">Home</a></li>
                                                                                     <% if(sesion.getAttribute("nick") != null){
-                                                                                        //if(sesion.getAttribute("perfil").toString().equals("administrador")){ %>
-                                                                                            <!--<li><a href="administracion.jsp">Administrar sitio</a></li>-->
-                                                                                        <%//}
+                                                                                        if(sesion.getAttribute("perfil").toString().equals("administrador")){ %>
+                                                                                            <li><a href="administracion.jsp">Administrar sitio</a></li>
+                                                                                        <%}
                                                                                         %>
                                                                                         
                                                                                         <li><a href="carritoUsuario.jsp">Carrito de <%=sesion.getAttribute("nick").toString()%></a></li>

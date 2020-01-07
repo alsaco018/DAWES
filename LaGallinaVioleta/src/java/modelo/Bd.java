@@ -7,11 +7,13 @@ package modelo;
 
 import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
@@ -239,5 +241,58 @@ public class Bd {
         }
             
        return lista; 
+    }
+    
+    public static ArrayList<Pedido> consultaPedidos(){
+        ArrayList<Pedido> lista = new ArrayList<Pedido>();
+        Pedido pedido;
+        Connection con = null;
+         
+        try {
+            con = crearConexion();
+            //Ejecucion de la sentencia SQL y obtencion de resultados en un objeto ResultSet
+            
+            //Obtencion de un objeto Statement para ejecutar sentencias SQL
+            String sentenciaSQL = "SELECT * FROM pedidos ";
+            
+            Statement stmt = (Statement) con.createStatement();
+            ResultSet rs = stmt.executeQuery(sentenciaSQL);
+            //Muestra de resultados mediante un bucle que recorre los registros que verifican la sentencia
+            
+            while(rs.next()){
+                pedido = new Pedido(rs.getInt(1), rs.getInt(2), rs.getString(3),rs.getDate(4));
+                lista.add(pedido);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Bd.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+       return lista; 
+    }
+
+    public static List<Pedido> consultaPedidos(String fechaIni, String fechaFin) {
+        ArrayList<Pedido> lista = new ArrayList<Pedido>();
+        Pedido pedido;
+        Connection con = null;
+         
+        try {
+            con = crearConexion();
+            //Ejecucion de la sentencia SQL y obtencion de resultados en un objeto ResultSet
+            
+            //Obtencion de un objeto Statement para ejecutar sentencias SQL
+            String sentenciaSQL = "SELECT * FROM pedidos where fecha between '"+fechaIni+"' and '"+fechaFin+"'";
+            
+            Statement stmt = (Statement) con.createStatement();
+            ResultSet rs = stmt.executeQuery(sentenciaSQL);
+            //Muestra de resultados mediante un bucle que recorre los registros que verifican la sentencia
+            
+            while(rs.next()){
+                pedido = new Pedido(rs.getInt(1), rs.getInt(2), rs.getString(3),rs.getDate(4));
+                lista.add(pedido);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Bd.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
     }
 }

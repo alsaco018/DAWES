@@ -24,6 +24,10 @@
         <servlet-name>ServletBorrarCarrito</servlet-name>
         <servlet-class>controlador.ServletBorrarCarrito</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletFiltrado</servlet-name>
+        <servlet-class>controlador.ServletFiltrado</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletLogin</servlet-name>
         <url-pattern>/ServletLogin</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>ServletBorrarCarrito</servlet-name>
         <url-pattern>/ServletBorrarCarrito</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletFiltrado</servlet-name>
+        <url-pattern>/ServletFiltrado</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

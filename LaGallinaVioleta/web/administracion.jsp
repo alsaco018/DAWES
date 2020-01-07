@@ -1,24 +1,29 @@
+<%-- 
+    Document   : administracion
+    Created on : 06-ene-2020, 21:27:02
+    Author     : alber
+--%>
+
 <%@page import="java.util.List"%>
-<%@page import="modelo.Producto"%>
+<%@page import="modelo.Pedido"%>
 <%@page import="modelo.Bd"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <% 
-    List<Producto> productos = Bd.consultaProductos();
-    HttpSession sesion = request.getSession();
-    int id = Integer.parseInt(sesion.getAttribute("productoActual").toString());
-    Producto prod = productos.get(id);
-      %>
-  <title><%=prod.getNombre() %></title>
-  <link rel="stylesheet" href="assets/css/comprarProducto.css">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+        <link rel="stylesheet" href="assets/css/comprarProducto.css">
+      <link rel="stylesheet" href="assets/css/carritoUsuario.css">
   <link rel="stylesheet" href="assets/css/header.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-
-</head>
-<body>
-    <!-- Header -->
+<% 
+    
+    HttpSession sesion = request.getSession();
+    List<Pedido> pedidos = Bd.consultaPedidos();
+      %>
+        <title>Filtrar pedidos</title>
+    </head>
+    <body> <!-- Header -->
 					<header id="header" class="alt">
 						<h1><a href="index.html">La Gallina Violeta</a></h1>
 						<nav id="nav">
@@ -53,14 +58,19 @@
 							</ul>
 						</nav>
 					</header>
+                      
 <!-- partial:index.partial.html -->
 <div class="container2">
-    <% if(sesion.getAttribute("nick") != null){ %>
-    <form action="ServletCompra" method="POST">
-        <input type="text" value="<%=prod.getId() %>" hidden name="id" id="id">
-  <div>
-      <img src="<%=prod.getFoto() %>" width="50%" height="50%" />
-  </div>
+    
+    <form action="ServletFiltrado" method="POST">
+        <br><br><br>
+     <h1 style="color: #9954c7">Elija el intervalo de fechas <p>por el que desea filtrar</p></h1> 
+     <div style="margin-left: 20%"><br>
+     <p>Fecha de inicio:</p>
+    <input type="date" name="fechaInicio" id="fechaInicio" class="form-control">
+    <br> <br>
+     </div>
+     
   <div class="slideshow-buttons">
     <div class="one"></div>
     <div class="two"></div>
@@ -69,29 +79,25 @@
   </div>
   
   
-  
+     
   <div class="product">
-    <p><%=Bd.consultaCategoria(prod.getCategoria())%></p>
-    <h1><%=prod.getNombre() %></h1>
-    <h2><%=(double)Math.round(prod.getPrecio() * 100d) / 100d %> Euros<input type="text" value="<%=prod.getPrecio() %>" hidden name="precio" id="precio"></h2>
-    <div class="sizes" style="margin-top: -1%">
-      <p class="pick"  style="margin-top: -50%; margin-left: -44%">Cantidad</p>
-      <input type="number" name="cantidad"  style="margin-left: -156%" min="1" max="20"  autofocus>
-  </div>
-    <p class="desc"><%=prod.getDescripcion() %></p>
-    <div class="buttons">
+      <br><br><br>
+    
+      <br><br><br>
+      <div style="margin-top: 12%">
+          <p>Fecha de fin:</p>
+    <input type="date" name="fechaFin" id="fechaFin"><br>
+     <br><br><br>
+      </div>
+    
+     <div class="buttons" style="margin-left: -120%">
         <button type="submit" class="button fit primary">Añadir</button>
       
     </div>
   </div>
     </form>
-    <%}else{ %>
-    <div>
-        <h1 style="color: red"><br>Debes logearte para poder realizar una compra.</h1><br>
-        <div align="center"><form><button class="button fit primary" type="submit" formaction="SignUp.html">Log in</button></form></div>
-    </div>
-             
-<%} %>
+     
+
 </div>
 
 <!-- partial -->
@@ -103,5 +109,6 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-</body>
+<script src="assets/js/carritoUsuario.js"></script> 
+    </body>
 </html>
